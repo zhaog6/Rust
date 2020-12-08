@@ -1,0 +1,3 @@
+FreeFEM is a FEM software
+HPDDM is a linear solver based on DDM
+APPEND: PETSc & SLEPc
