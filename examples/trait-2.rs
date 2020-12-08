@@ -53,7 +53,8 @@ where T: Descriptive + Character
 	return a as i32;
 }
 
-fn main() {
+fn main()
+{
     let cali = Person {
         name: String::from("Cali"),
         age: 24
