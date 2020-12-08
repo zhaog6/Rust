@@ -30,7 +30,7 @@ fn main() -> std::io::Result<()>
 	file.read(&mut buffer).unwrap();
 	println!("{:?}", buffer);
 	file.read(&mut buffer).unwrap();
-	println!("{:?}", buffer);
+	println!("{:?}\n", buffer);
 
 	// 文件写入（一次性写入）
 	//std::fs::write("log.txt", "Rust Programming\n").unwrap();
@@ -43,6 +43,16 @@ fn main() -> std::io::Result<()>
 	// 追加写入
 	let mut file = std::fs::OpenOptions::new().append(true).open("log.txt")?;  //也可加.unwrap()
 	file.write(b"APPEND: PETSc & SLEPc\n")?;  //也可加.unwrap()
+
+	// 以读写权限打开文件
+	let f3 = std::fs::read_to_string("log.txt")?;
+	match f3.len() {
+		0 => {
+			let mut file = std::fs::OpenOptions::new().read(true).write(true).open("log.txt")?;
+			file.write(b"Numerical Simulation Software Library\n")?;
+		},
+		_ => { println!("Unsafe: something is trying to write the file"); }
+	}
 
 	Ok(())
 }
